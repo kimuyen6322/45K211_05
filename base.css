@@ -1,0 +1,28 @@
+:roof {
+    --lightblue-color: rgb(95, 167, 201);
+    --darkblude-color: rgb(14, 123, 185);
+    --text-color: #333; 
+    --my-color:rgb(46, 104, 170);
+
+}   
+* {
+    box-sizing: inherit;
+}
+html{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+.grid{
+    width: 1200px;
+    max-width: 100%;
+    margin:0 auto;
+}
+.grid__full-width{
+    width:100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+}
