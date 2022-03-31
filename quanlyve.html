@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>
+     Nhà xe Khánh Truyền
+    </title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="./script/qlv.js"></script>
+</head>
+
+    <body>
+        <Div class="app">
+            <header class="header">
+                    <Nav class="header__navbar">
+                        <ul class=" header__navbar-list">
+                           <li class="header__navbar-item ">
+                               <a href="" class="header__navbar-item "></a> </li>
+                               </ul>
+                               <ul class=" header__navbar-list">
+                            <li class="header__navbar-item "> <a href="trangchu.html" class="header__navbar-item ">Trang chủ </a> </li> 
+                            <li class="header__navbar-item "> <a href="" class="header__navbar-item ">Thông báo</a> </li>
+                            <li class="header__navbar-item "><a href="" class="header__navbar-item ">Đăng xuất</a> </li>
+                         </ul>
+                        
+                    </Nav>
+
+                  
+                   
+            </header>
+
+            <div class="background">
+              <img src="background.jpg" alt="backgroundtrangchu">
+             </div>
+          
+          
+          
+            <div class="textbox">
+                <input type="text" placeholder="Tìm kiếm..."/>
+                <button class="button1">Tìm</button>
+               
+              </div>
+              <h1>
+              
+                Trang chủ > Quản lý vé
+      
+              </h1>
+
+        <div id="vertical-menu">
+            <ul>
+                <li class=><a href="quanlylichtrinh.html">Quản lý lịch trình</a></li>
+                <li class=><a href="quanlyve.html">Quản lý vé</a>
+                <li class=><a href="quanlyxe.html">Quản lý xe</a></li>
+                <li class=><a href="quanlydonhang.html">Quản lý đơn hàng</a></li>
+                <li class=><a href="thongke.html">Thống kê doanh thu</a></li>
+          </ul>
+          <form action="">
+         
+          
+            <table style="margin-bottom: 10px; font-size: 12px;">
+              <th style="width:150px; text-align: center; background-color: rgb(138, 203, 233);margin-bottom: 10px;">Thông tin vé</th>
+              </table>
+            <table id="table">
+            <tr>
+                <td> Mã lịch trình: </td>
+                <td style="width:70px"> <input type="text" name="Malichtrinh"></td>
+            </tr>
+            <tr>  
+              <td> Mã xe: </td>
+              <td style="width:70px"> <input type="text" name="Maxe"></td>
+            </tr>
+            <tr>
+              <td> Nơi xuất phát: </td>
+              <td style="width:70px">
+                <select name="noixuatphat" id="">
+                  <option>Thừa Thiên Huế</option>
+                  <option>Hà Tĩnh</option>
+                  <option>Đà Nẵng</option>
+                  <option>Quảng Trị</option>
+                  <option>Quảng Bình</option>
+                  <option>Quảng Nam</option>
+                </select>
+              </td>
+          </tr>
+          <tr>
+            <td> Nơi đến: </td>
+            <td style="width:70px">
+               <select name="noixuatphat" id="">
+              <option>Thừa Thiên Huế</option>
+              <option>Hà Tĩnh</option>
+              <option>Đà Nẵng</option>
+              <option>Quảng Trị</option>
+              <option>Quảng Bình</option>
+              <option>Quảng Nam</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td> Thời gian đi: </td>
+          <td > <input type="time" name="Thoigiandi"></td>
+      </tr>
+      <tr>
+        <td> Ngày đi: </td>
+        <td> <input type="date" name="Ngaydi"></td>
+    </tr>
+
+  <table class="bangbt">
+ <tr>
+        <td><button class="buttontsx">Thêm</button> </td>
+        <td> <button class="buttontsx">Sửa</button></td>
+        <td><button class="buttontsx">Xóa</button></td>
+       
+ </tr>
+</table ><table style="margin-top: 8px;margin-left:77px">
+ <tr>
+  <td><button class="buttontsx" style="width:90px">Thống kê</button></td>
+ </tr>
+</table>
+
+
+
+
+        </form>
+        
+        <table class="bang">
+
+          <thead>
+            <tr>
+                <th style="background-color: rgb(138, 203, 233);">Mã vé</th>
+                <th style="background-color: rgb(138, 203, 233);">Mã xe</th>
+                <th style="background-color: rgb(138, 203, 233);">Mã lịch trình</th>
+                <th style="background-color: rgb(138, 203, 233);">Giá vé</th>
+                <th style="background-color: rgb(138, 203, 233);">Tình trạng vé</th>
+
+            </tr>
+        </thead>
+         
+          <tr class="tr">
+            <td style="width: 120px;height: 20px;"></td>
+            <td style="width: 120px;height: 20px;"></td>
+            <td style="width: 120px;height: 20px;"></td>
+            <td style="width: 120px;height: 20px;"></td>
+            <td style="width: 120px;height: 20px;"></td>
+        
+          </tr>
+          <tr class="tr"> <td></td><td></td><td></td><td></td><td></td><td></tr>
+          <tr class="tr"> <td></td><td></td><td></td><td></td><td></td><td></tr>
+          <tr class="tr"> <td></td><td></td><td></td><td></td><td></td><td></tr>
+          <tr class="tr"> <td></td><td></td><td></td><td></td><td></td><td></tr>
+          <tr class="tr"> <td></td><td></td><td></td><td></td><td></td><td></tr>
+          
+          
+          
+      </table>
+     
+</form>
+       
+
+        </div>
+        
+    </body>
+    </html>
