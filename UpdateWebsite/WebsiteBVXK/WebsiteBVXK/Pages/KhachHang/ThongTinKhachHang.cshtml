@@ -1,0 +1,50 @@
+﻿@page
+@model WebsiteBVXK.Pages.KhachHang.ThongTinKhachHangModel
+@{
+    Layout = "_Layout";
+    ViewData["Tittle"] = "Thông Tin Khách Hàng";
+}
+
+<form method="post" class="banner">
+    <div class="noidung">
+        <div class="form">
+            <h2><b>Thông Tin Khách Hàng</b></h2>
+            <div>
+                <div class="input-form">
+                    <span>Tên Khách Hàng<sup>*</sup></span>
+                    <input asp-for="tenkhach" type="text" placeholder="Nhập họ và tên của bạn" required/>
+                </div>
+                <div class="input-form">
+                    <span>Số điện thoại<sup>*</sup></span>
+                    <input type="text" asp-for="sdt" placeholder="Nhập số điện thoại của bạn" required/>
+                </div>
+                <div class="input-form">
+                    <span>Email<sup>*</sup></span>
+                    <input type="text" asp-for="email" placeholder="Nhập địa chỉ email của bạn" required/>
+                </div>
+                <div class="input-form">
+                    <span>CMND/CCCD<sup>*</sup></span>
+                    <input type="text" asp-for="cmnd" placeholder="Nhập CMND CCCD của bạn" required/>
+                </div>
+                <div class="input-form">
+                    <span>Ghi chú</span>
+                    <textarea name="ghichu" asp-for="ghichu" id="ghichu" cols="45" rows="5"></textarea>
+                </div>
+            </div>
+            <section>
+                <div class="notes-container">
+                    <span class="title">Lưu ý</span> <br>
+                    (*) Quý khách vui lòng mang email có chứa mã vé đến văn phòng để đổi vé lên xe trước giờ xuất bến ít nhất
+                    <span class="high-light">60 phút</span>
+                    để chúng tôi trung chuyển.
+                    <p class="txt">(*) Thông tin hành khách phải chính xác, nếu không sẽ không thể lên xe hoặc hủy/đổi vé.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="content">
+        <button type="submit">            
+            <span>Tiếp tục</span>
+        </button>
+    </div>
+</form>
