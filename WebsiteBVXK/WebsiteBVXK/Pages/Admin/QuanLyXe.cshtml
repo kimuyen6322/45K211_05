@@ -10,7 +10,7 @@
         <h1>Trang Quản lý</h1>
         <ul class="breadcrumb">
             <li>
-                <a href="#">Trang Quản lý</a>
+                <a class="active" asp-page="/Admin/TrangQuanLy">Trang Quản lý</a>
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
@@ -18,13 +18,9 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="btn-download">
-        <i class='bx bxs-cloud-download'></i>
-        <span class="text">Download PDF</span>
-    </a>
 </div>
 
-<div class="table-data">
+<div id="quan-ly-xe" class="table-data">
 
     <div class="todo">
         <div class="head">
@@ -32,63 +28,57 @@
 
         </div>
 
-        <ul class="input-list">
+        <div class="input-list">
             <table class="inputable">
                 <tr>
-                    <td> Mã xe:</td>
+                    <td> Mã xe: </td>
                     <td>
-                        <input type="text">
+                        <input readonly type="text" v-model="xeViewModel.idXe">
                     </td>
                 </tr>
                 <tr>
 
                     <td>Tên tài xế:  </td>
                     <td>
-                        <input type="text">
+                        <input type="text" v-model="xeViewModel.tenTaiXe">
                     </td>
                 </tr>
 
                 <tr>
                     <td> Loại xe:  </td>
                     <td>
-                        <select name="loaixe" id="">
-                            <option>Ngồi</option>
-                            <option>Nằm </option>
+                        <select type="text" v-model="xeViewModel.loaiXe" @@change="onLoaiXeChange(xeViewModel.loaiXe)">
+                            <option value=0>Thường</option>
+                            <option value=1>Vip</option>
                         </select>
                     </td>
                 </tr>
-                <td> Số điện thoại: </td>
-                <td>
-                    <input type="tel" name="sodienthoai">
-                </td>
+                <tr>
+                    <td> Số điện thoại: </td>
+                    <td>
+                        <input type="tel" name="sodienthoai" v-model="xeViewModel.soDienThoai">
+                    </td>
                 </tr>
                 <tr>
                 <tr>
                     <td> Số lượng ghế </td>
                     <td>
-                        <select name="noiden" id="">
-                            <option>4 chỗ</option>
-                            <option>7 chỗ</option>
-                            <option>16 chỗ</option>
-                            <option>20 chô</option>
-                            <option>32 chỗ</option>
-                        </select>
+                        <input type="text" v-model="xeViewModel.soLuongGhe" readonly>
                     </td>
                 </tr>
                 <td> Biển số: </td>
                 <td>
-                    <input type="text" name="bienso">
+                    <input type="text" name="bienso" v-model="xeViewModel.bienSo">
                 </td>
                 </tr>
-
             </table>
-        </ul>
+        </div>
         <table class="table-button">
             <tr>
                 <td>
-                    <button class="buttontsx">Thêm</button>
-                    <button class="buttontsx">Xóa</button>
-                    <button class="buttontsx">Sửa</button>
+                    <button class="buttontsx" @@click="createXe()">Thêm</button>
+                    <button class="buttontsx" @@click="deleteXe()">Xóa</button>
+                    <button class="buttontsx" @@click="updateXe()">Sửa</button>
                 </td>
 
             </tr>
@@ -113,35 +103,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="status pending"> X0001</span></td>
-                    <td>Nguyễn Thị Mai Linh</td>
-                    <td>Ngồi</td>
-                    <td>0708030580</td>
-                    <td>4 chỗ</td>
-                    <td>75A-945837</td>
-
-                </tr>
-                <tr>
-                    <td><span class="status pending"> X0002</span></td>
-                    <td>Trần Khánh Quỳnh</td>
-                    <td>Ngồi</td>
-                    <td>0366442978</td>
-                    <td>4 chỗ</td>
-                    <td>78A-94385</td>
-
-                </tr>
-                <tr>
-                    <td><span class="status pending"> X0003</span></td>
-                    <td>Trần Võ Thị Thùy Tiên</td>
-                    <td>Ngồi</td>
-                    <td>0937483532</td>
-                    <td>4 chỗ</td>
-                    <td>43A-48563</td>
-
-                </tr>
+                <tr v-for="(xe, index) in xes" @@click="editProduct(xe.idXe, index)">
+					<td><span class="status pending"> {{xe.idXe}} </span></td>
+					<td>{{xe.tenTaiXe}}</td>
+					<td>{{xe.loaiXe}}</td>
+					<td>{{xe.soDienThoai}}</td>
+					<td>{{xe.soLuongGhe}}</td>
+					<td>{{xe.bienSo }}</td>
+				</tr>
             </tbody>
         </table>
 
     </div>
 </div>
+
+@section scripts{
+    <script src="~/js/xes.js"></script>
+}

@@ -1,3 +1,5 @@
+using BVXK.Domain.Infrastructure;
+using BVXK.Domain.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +28,27 @@ namespace WebsiteBVXK
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddHttpContextAccessor();
+
+            services.AddMvc(otps =>
+            {
+                otps.EnableEndpointRouting = false;
+            });
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.Name = "donhang";
+            });
+            //services.AddRazorPages();
+
+            services.AddDbContext<BVXKContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("WebsiteBVXKContext")));
+
+            services.AddApplicationServices();
         }
 
         // This method gets called by the runtime.
@@ -43,15 +65,16 @@ namespace WebsiteBVXK
             }
 
             app.UseStaticFiles();
-
+            app.UseHttpsRedirection();
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseSession();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapRazorPages();
+            //});
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

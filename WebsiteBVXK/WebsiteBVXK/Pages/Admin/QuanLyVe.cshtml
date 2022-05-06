@@ -10,7 +10,7 @@
         <h1>Trang Quản lý</h1>
         <ul class="breadcrumb">
             <li>
-                <a href="#">Trang Quản lý</a>
+                <a class="active" asp-page="/Admin/TrangQuanLy">Trang Quản lý</a>
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
@@ -18,15 +18,11 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="btn-download">
-        <i class='bx bxs-cloud-download'></i>
-        <span class="text">Download PDF</span>
-    </a>
 </div>
 
 
 
-<div class="table-data">
+<div id = "quan-ly-ve" class="table-data">
 
     <div class="todo">
         <div class="head">
@@ -39,47 +35,70 @@
                 <tr>
                     <td> Mã vé:</td>
                     <td>
-                        <input type="text">
+                        <input readonly type="text" v-model="veViewModel.idVe"/>
                     </td>
                 </tr>
-                <tr>
-
-                    <td>Mã xe:  </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-
                 <tr>
                     <td> Mã lịch trình:  </td>
                     <td>
-                        <input type="text">
+                        <select type="text" v-model="veViewModel.idLichTrinh" @@change="onchangeLichTrinh()">
+                            @{
+                                foreach (var lichTrinh in Model.LichTrinhs)
+                                {
+                                    <option value=@lichTrinh.IdLichTrinh>@lichTrinh.IdLichTrinh</option>
+                                }
+                            }
+                        </select>
                     </td>
-                    </td>
-                </tr>
-                <td> Giá vé: </td>
-                <td>
-                    <input type="text" name="giave">
-                </td>
                 </tr>
                 <tr>
+                    <td>Mã xe:  </td>
+                    <td>
+                        <input type="text" readonly v-model="veViewModel.idXe" />
+                        @*<select type="text" v-model="veViewModel.idXe">
+                            @{
+                                foreach(var xe in Model.Xes)
+                                {
+                                    <option value=@xe.idXe>@xe.idXe</option>
+                                }
+                            }
+                        </select>*@
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td> Giá vé: </td>
+                    <td>
+                        <input type="text" name="giave" v-model="veViewModel.giaVe"/>
+                    </td>
+                </tr>
+                
                 <tr>
                     <td> Tình trạng vé:</td>
                     <td>
-                        <input type="text" name="tinhtrangve">
+                        <select name="tinhtrangve" id="" v-model="veViewModel.tinhTrang">
+                            <option :value=0>Còn</option>
+                            <option :value=1>Đã hết</option>
+                        </select>
                     </td>
                 </tr>
-
-
+                @*<tr>
+                    <td> Loại vé:</td>
+                    <td>
+                        <select name="loaive"  v-model="veViewModel.loaiVe">
+                            <option value=0>Thường</option>
+                            <option value=1>Vip</option>
+                        </select>
+                    </td>
+                </tr>*@
             </table>
         </ul>
         <table class="table-buttonve">
             <tr>
                 <td>
-                    <button class="buttontsx">Thêm</button>
-                    <button class="buttontsx">Xóa</button>
-                    <button class="buttontsx">Sửa</button>
-                    <button class="buttontsx">Thống kê</button>
+                    <button class="buttontsx" @@click="createTicket()">Thêm</button>
+                    <button class="buttontsx" @@click="deleteTicket()">Xóa</button>
+                    <button class="buttontsx" @@click="updateTicket()">Sửa</button>
                 </td>
             </tr>
         </table>
@@ -87,7 +106,7 @@
 
     <div class="order">
         <div class="head">
-            <h3>Danh sách lịch trình</h3>
+            <h3>Danh sách vé</h3>
         </div>
         <table>
             <thead>
@@ -97,29 +116,17 @@
                     <th>Mã lịch trình</th>
                     <th>Giá vé</th>
                     <th>Tình trạng vé</th>
+                    @*<th>Loại vé</th>*@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="status pending"> V0001</span></td>
-                    <td>X0001</td>
-                    <td>LT001</td>
-                    <td>200000</td>
-                    <td>Đã đặt</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> V0002</span></td>
-                    <td>X0002</td>
-                    <td>LT002</td>
-                    <td>200000</td>
-                    <td>Đã đặt</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> V0003</span></td>
-                    <td>X0003</td>
-                    <td>LT003</td>
-                    <td>200000</td>
-                    <td>Đã đặt</td>
+                <tr v-for="(ticket, index) in tickets" @@click="editProduct(ticket.idVe, index)">
+                    <td><span class="status pending"> {{ticket.idVe}}</span></td>
+                    <td>{{ticket.idXe}}</td>
+                    <td>{{ticket.idLichTrinh}}</td>
+                    <td>{{ticket.giaVe}}</td>
+                    <td>{{ticket.tinhTrang}}</td>
+                    @*<td>{{ticket.loaiVe}}</td>*@
                 </tr>
             </tbody>
         </table>
@@ -127,3 +134,7 @@
     </div>
 
 </div>
+
+@section scripts{
+    <script src="~/js/tickets.js"></script>
+}

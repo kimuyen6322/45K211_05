@@ -10,7 +10,7 @@
         <h1>Trang Quản lý</h1>
         <ul class="breadcrumb">
             <li>
-                <a href="#">Trang Quản lý</a>
+                <a class="active" asp-page="/Admin/TrangQuanLy">Trang Quản lý</a>
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
@@ -18,82 +18,100 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="btn-download">
-        <i class='bx bxs-cloud-download'></i>
-        <span class="text">Download PDF</span>
-    </a>
 </div>
 
 
 
-<div class="table-data">
+<div id="quan-ly-lich-trinh" class="table-data">
 
     <div class="todo">
         <div class="head">
             <h3>Thông tin lịch trình</h3>
         </div>
-
-        <ul class="input-list">
+        <div class="input-list">
             <table class="inputable">
-                <tr>
-                    <td> Mã lịch trình:</td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
+                <tbody>
+                    <tr>
+                        <td> Mã lịch trình:</td>
+                        <td>
+                            <input readonly type="text" v-model="lichtrinhModel.IdLichTrinh">
+                        </td>
+                    </tr>
+                    <tr>
 
-                    <td>	Mã xe:  </td>
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td> Nơi xuất phát:  </td>
-                    <td>
-                        <select name="noixuatphat" id="">
-                            <option>Đà Nẵng</option>
-                            <option>Hà Tĩnh</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td> Nơi đến: </td>
-                    <td>
-                        <select name="noiden" id="">
-                            <option>Đà Nẵng</option>
-                            <option>Hà Tĩnh</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td> Ngày đi: </td>
-                    <td> <input type="date" name="ngaydi" /> 	</td>
-                </tr>
-                <tr>
-                    <td> Thời gian đi: </td>
-                    <td> <input type="time" name="thoigiandi" /> </td>
-                </tr>
-                <tr>
-                    <td>Thời gian đến: </td>
-                    <td><input type="time" name="thoigianden" />
-                    <td>
-
-                </tr>
+                        <td>Mã xe:</td>
+                        <td>
+                            <select type="text" v-model="lichtrinhModel.IdXe">
+                                @{
+                                    foreach(var xe in Model.Xes)
+                                    {
+                                        <option value=@xe.idXe>@xe.idXe</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Nơi xuất phát:  </td>
+                        <td>
+                            <select name="noixuatphat" id="" v-model="lichtrinhModel.NoiXuatPhat">
+                                @{
+                                    for(int tinh = 0; tinh < Model.diemDi.Count; tinh++)
+                                    {
+                                        <option value=@Model.diemDi[tinh]>@Model.diemDi[tinh]</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Nơi đến: </td>
+                        <td>
+                            <select name="noixuatphat" id="" v-model="lichtrinhModel.NoiDen">
+                                @{
+                                    for(int tinh = 0; tinh < Model.diemDen.Count; tinh++)
+                                    {
+                                        <option value=@Model.diemDen[tinh]> @Model.diemDen[tinh]</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Ngày đi: </td>
+                        <td> 
+                            <input type="date" id="ngay-di" name="ngaydi" v-model="lichtrinhModel.NgayDi" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Thời gian đi: </td>
+                        <td> <input type="time" id="gio-di" name="thoigiandi" v-model="lichtrinhModel.GioDi"/> </td>
+                    </tr>
+                    <tr>
+                        <td> Ngày đến: </td>
+                        <td> 
+                            <input type="date" id="ngay-den" name="ngayden" v-model="lichtrinhModel.NgayDen" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian đến: </td>
+                        <td>
+                            <input type="time" id="gio-den" name="thoigianden" v-model="lichtrinhModel.GioDen"/>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-        </ul>
+        </div>
         <table class="table-button">
             <tr>
                 <td>
-                    <button class="buttontsx">Thêm</button>
-                    <button class="buttontsx">Xóa</button>
-                    <button class="buttontsx">Sửa</button>
+                    <button class="buttontsx" @@click="createLichTrinh()">Thêm</button>
+                    <button class="buttontsx" @@click="deleteLichTrinh()">Xóa</button>
+                    <button class="buttontsx" @@click="updateLichTrinh()">Sửa</button>
                 </td>
 
             </tr>
         </table>
-
     </div>
 
     <div class="order">
@@ -109,38 +127,47 @@
                     <th>Nơi đến</th>
                     <th>Ngày đi</th>
                     <th>Thời gian đi</th>
+                    <th>Ngày đến</th>
                     <th>Thời gian đến</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="status pending"> LT0001</span></td>
-                    <td>X00001</td>
-                    <td>Hà Tĩnh</td>
-                    <td>Đà Nẵng</td>
-                    <td>22/08/2021</td>
-                    <td>13:00</td>
-                    <td>22:00</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> LT0002</span></td>
-                    <td>X00002</td>
-                    <td>Hà Tĩnh</td>
-                    <td>Đà Nẵng</td>
-                    <td>22/08/2021</td>
-                    <td>13:00</td>
-                    <td>22:00</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> LT0003</span></td>
-                    <td>X00003</td>
-                    <td>Hà Tĩnh</td>
-                    <td>Đà Nẵng</td>
-                    <td>22/08/2021</td>
-                    <td>13:00</td>
-                    <td>22:00</td>
+                <tr v-for="(lichtrinh, index) in lichtrinhs" @@click="editLichTrinh(lichtrinh.idLichTrinh, index)">
+                    <td><span class="status pending"> {{lichtrinh.idLichTrinh}}</span></td>
+                    <td>{{lichtrinh.idXe}}</td>
+                    <td>{{lichtrinh.noiXuatPhat}}</td>
+                    <td>{{lichtrinh.noiDen}}</td>
+                    <td>{{lichtrinh.ngayDi}}</td>
+                    <td>{{lichtrinh.gioDi}}</td>
+                    <td>{{lichtrinh.ngayDen}}</td>
+                    <td>{{lichtrinh.gioDen}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    document.getElementById("ngay-di").min = today;
+    document.getElementById("ngay-den").min = today;
+
+</script>
+
+@section scripts{
+    <script src="~/js/lichtrinhs.js"></script>
+}

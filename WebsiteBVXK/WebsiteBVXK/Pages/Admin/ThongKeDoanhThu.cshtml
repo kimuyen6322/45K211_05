@@ -10,7 +10,7 @@
         <h1>Trang Quản lý</h1>
         <ul class="breadcrumb">
             <li>
-                <a href="#">Trang Quản lý</a>
+                <a class="active" asp-page="/Admin/TrangQuanLy">Trang Quản lý</a>
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
@@ -18,38 +18,46 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="btn-download">
-        <i class='bx bxs-cloud-download'></i>
-        <span class="text">Download PDF</span>
-    </a>
 </div>
 
-<div class="table-data">
+<div id="thong-ke-doanh-thu" class="table-data">
     <div class="todo">
         <div class="head">
             <h3>Thống kê doanh thu</h3>
         </div>
 
-        <ul class="input-list">
+        <div class="input-list">
             <table class="inputable">
                 <tr>
-                    <td> Từ ngày:</td>
+                    <td>Từ ngày:</td>
                     <td>
-                        <input type="date">
+                        <input id="tu-ngay" type="date" v-model="from"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>Đến ngày:  </td>
+                    <td>Đến ngày:</td>
                     <td>
-                        <input type="date">
+                        <input id="den-ngay" type="date" v-model="to"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tổng doanh thu: </td>
+                    <td>
+                        <input type="text" readonly v-model="this.tongDoanhThu"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tổng số vé: </td>
+                    <td>
+                        <input type="text" readonly v-model="this.tongSoVe"/>
                     </td>
                 </tr>
             </table>
-        </ul>
+        </div>
         <table class="table-buttoncn">
             <tr>
                 <td>
-                    <button class="buttontcn">Thống kê</button>
+                    <button class="buttontcn" @@click="getThongKesBetween()">Thống kê</button>
                 </td>
             </tr>
         </table>
@@ -66,28 +74,22 @@
                     <th>Ngày đặt vé</th>
                     <th>Loại vé</th>
                     <th>Giá vé</th>
+                    <th>Số lượng</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="status pending"> V0001</span></td>
-                    <td>20/3/2022</td>
-                    <td>Ngồi</td>
-                    <td>300000</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> V0002</span></td>
-                    <td>20/3/2022</td>
-                    <td>Ngồi</td>
-                    <td>300000</td>
-                </tr>
-                <tr>
-                    <td><span class="status pending"> V0003</span></td>
-                    <td>20/3/2022</td>
-                    <td>Ngồi</td>
-                    <td>300000</td>
+                <tr v-for="(thongke, index) in thongkes">
+                    <td><span class="status pending">{{thongke.idVe}}</span></td>
+                    <td>{{thongke.ngayDat}}</td>
+                    <td>{{thongke.loaiVe}}</td>
+                    <td>{{thongke.giaVe}}</td>
+                    <td>{{thongke.soLuong}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/js/thongkes.js"></script>
+}
